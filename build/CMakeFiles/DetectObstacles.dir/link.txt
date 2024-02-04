@@ -1,0 +1,3 @@
+D:\CMake\bin\cmake.exe -E rm -f CMakeFiles\DetectObstacles.dir/objects.a
+C:\MinGW\bin\ar.exe qc CMakeFiles\DetectObstacles.dir/objects.a @CMakeFiles\DetectObstacles.dir\objects1.rsp
+C:\MinGW\bin\g++.exe -Wl,--whole-archive CMakeFiles\DetectObstacles.dir/objects.a -Wl,--no-whole-archive -o D:\BOSCH\DetectObstacles.exe -Wl,--out-implib,libDetectObstacles.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\DetectObstacles.dir\linkLibs.rsp
