@@ -128,6 +128,19 @@ DetectObstacles/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\DetectObstacles.dir\build.make CMakeFiles/DetectObstacles.dir/build
 .PHONY : DetectObstacles/fast
 
+#=============================================================================
+# Target rules for targets named TestMemory
+
+# Build rule for target.
+TestMemory: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 TestMemory
+.PHONY : TestMemory
+
+# fast build rule for target.
+TestMemory/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TestMemory.dir\build.make CMakeFiles/TestMemory.dir/build
+.PHONY : TestMemory/fast
+
 DetectObstacles.obj: DetectObstacles.cpp.obj
 .PHONY : DetectObstacles.obj
 
@@ -152,6 +165,54 @@ DetectObstacles.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\DetectObstacles.dir\build.make CMakeFiles/DetectObstacles.dir/DetectObstacles.cpp.s
 .PHONY : DetectObstacles.cpp.s
 
+LinearAllocator.obj: LinearAllocator.cpp.obj
+.PHONY : LinearAllocator.obj
+
+# target to build an object file
+LinearAllocator.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TestMemory.dir\build.make CMakeFiles/TestMemory.dir/LinearAllocator.cpp.obj
+.PHONY : LinearAllocator.cpp.obj
+
+LinearAllocator.i: LinearAllocator.cpp.i
+.PHONY : LinearAllocator.i
+
+# target to preprocess a source file
+LinearAllocator.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TestMemory.dir\build.make CMakeFiles/TestMemory.dir/LinearAllocator.cpp.i
+.PHONY : LinearAllocator.cpp.i
+
+LinearAllocator.s: LinearAllocator.cpp.s
+.PHONY : LinearAllocator.s
+
+# target to generate assembly for a file
+LinearAllocator.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TestMemory.dir\build.make CMakeFiles/TestMemory.dir/LinearAllocator.cpp.s
+.PHONY : LinearAllocator.cpp.s
+
+TestMemory.obj: TestMemory.cpp.obj
+.PHONY : TestMemory.obj
+
+# target to build an object file
+TestMemory.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TestMemory.dir\build.make CMakeFiles/TestMemory.dir/TestMemory.cpp.obj
+.PHONY : TestMemory.cpp.obj
+
+TestMemory.i: TestMemory.cpp.i
+.PHONY : TestMemory.i
+
+# target to preprocess a source file
+TestMemory.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TestMemory.dir\build.make CMakeFiles/TestMemory.dir/TestMemory.cpp.i
+.PHONY : TestMemory.cpp.i
+
+TestMemory.s: TestMemory.cpp.s
+.PHONY : TestMemory.s
+
+# target to generate assembly for a file
+TestMemory.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TestMemory.dir\build.make CMakeFiles/TestMemory.dir/TestMemory.cpp.s
+.PHONY : TestMemory.cpp.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -161,9 +222,16 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... DetectObstacles
+	@echo ... TestMemory
 	@echo ... DetectObstacles.obj
 	@echo ... DetectObstacles.i
 	@echo ... DetectObstacles.s
+	@echo ... LinearAllocator.obj
+	@echo ... LinearAllocator.i
+	@echo ... LinearAllocator.s
+	@echo ... TestMemory.obj
+	@echo ... TestMemory.i
+	@echo ... TestMemory.s
 .PHONY : help
 
 

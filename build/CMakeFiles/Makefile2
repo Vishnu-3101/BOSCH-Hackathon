@@ -63,6 +63,7 @@ CMAKE_BINARY_DIR = D:\BOSCH\build
 
 # The main recursive "all" target.
 all: CMakeFiles/DetectObstacles.dir/all
+all: CMakeFiles/TestMemory.dir/all
 .PHONY : all
 
 # The main recursive "preinstall" target.
@@ -71,6 +72,7 @@ preinstall:
 
 # The main recursive "clean" target.
 clean: CMakeFiles/DetectObstacles.dir/clean
+clean: CMakeFiles/TestMemory.dir/clean
 .PHONY : clean
 
 #=============================================================================
@@ -98,6 +100,32 @@ DetectObstacles: CMakeFiles/DetectObstacles.dir/rule
 CMakeFiles/DetectObstacles.dir/clean:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\DetectObstacles.dir\build.make CMakeFiles/DetectObstacles.dir/clean
 .PHONY : CMakeFiles/DetectObstacles.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/TestMemory.dir
+
+# All Build rule for target.
+CMakeFiles/TestMemory.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TestMemory.dir\build.make CMakeFiles/TestMemory.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TestMemory.dir\build.make CMakeFiles/TestMemory.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=D:\BOSCH\build\CMakeFiles --progress-num=3,4,5 "Built target TestMemory"
+.PHONY : CMakeFiles/TestMemory.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/TestMemory.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\BOSCH\build\CMakeFiles 3
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 CMakeFiles/TestMemory.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\BOSCH\build\CMakeFiles 0
+.PHONY : CMakeFiles/TestMemory.dir/rule
+
+# Convenience name for target.
+TestMemory: CMakeFiles/TestMemory.dir/rule
+.PHONY : TestMemory
+
+# clean rule for target.
+CMakeFiles/TestMemory.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TestMemory.dir\build.make CMakeFiles/TestMemory.dir/clean
+.PHONY : CMakeFiles/TestMemory.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.
