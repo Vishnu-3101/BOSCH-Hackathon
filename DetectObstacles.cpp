@@ -1,6 +1,8 @@
 #include <opencv2/opencv.hpp>
 #include <iostream>
 #include <cstring>
+#include "LinearAllocator.h"
+#include "Utils.h"
 using namespace std;
 
 
@@ -11,33 +13,57 @@ int main(int argc, char** argv) {
         std::cerr << "Usage: " << argv[0] << " <video_file_path> <memory_address> <executable_name>" << std::endl;
         return -1;
     }
-
-    // Read the video file
     cv::VideoCapture cap(argv[1]);
 
+    
+    // Read the video file
     if (!cap.isOpened()) {
         std::cerr << "Error opening video file: " << argv[1] << std::endl;
         return -1;
     }
 
-    // Use the provided memory address
-    std::string memoryAddress(argv[2]);
+    int frameWidth = 640;
+    int frameHeight = 480;
+    double fps = cap.get(cv::CAP_PROP_FPS);
+    
+    int fourcc = cv::VideoWriter::fourcc('M', 'J', 'P', 'G'); 
+    cv::VideoWriter videoWriter("output.avi", fourcc, fps, cv::Size(frameWidth, frameHeight),true);
 
-    // Create a custom memory manager instance
     cv::Mat frame, gray, prevFrame;
+
     cap >> prevFrame;
     cv::resize(prevFrame,prevFrame,cv::Size(640,480));
+    cv::cvtColor(prevFrame, prevFrame, cv::COLOR_BGR2GRAY);
+    // cout<<"Size of frame: "<<sizeof(prevFrame)<<endl;
+    const std::size_t totalSize = 640 * 480 * 3 * 5; // Assuming frames are 3 channels (BGR) and storing two frames
+    void* startAddress = malloc(totalSize);
+
+    LinearAllocator allocator(totalSize);
+    allocator.Init(startAddress);
+    const std::size_t frameSize = 640 * 480;
+
+    void* pre_ptr = allocator.Allocate(frameSize);
+    
+    std::memcpy(pre_ptr, prevFrame.data, frameSize);
+
     while (cap.read(frame)) {
-        cout<<"yes"<<endl;
-        cv::resize(frame,frame,cv::Size(640,480));
-        // Convert frames to grayscale
+        cv::resize(frame,frame,cv::Size(640,480)); 
+        void* frm_ptr = allocator.Allocate(frameSize);
+        std::memcpy(frm_ptr, frame.data, frameSize); 
+        std::cout<<frm_ptr<<std::endl; 
+
         cv::cvtColor(frame, gray, cv::COLOR_BGR2GRAY);
-        cv::resize(prevFrame, prevFrame, cv::Size(640,480));
+        void* gray_ptr = allocator.Allocate(frameSize);
+        std::memcpy(gray_ptr, gray.data, frameSize);
+        std::cout<<gray_ptr<<std::endl;
+        // cv::resize(prevFrame, prevFrame, cv::Size(640,480));
         // Compute absolute difference between frames
         cv::Mat diff;
-        if(gray.type()==prevFrame.type()){ 
-            cv::absdiff(prevFrame, gray, diff);
-        }
+        
+        cv::absdiff(prevFrame, gray, diff);   
+        void* diff_ptr = allocator.Allocate(frameSize);  
+        std::memcpy(diff_ptr, diff.data, frameSize);  
+        std::cout<<diff_ptr<<std::endl;
 
         // Apply threshold to get binary image
         cv::threshold(diff, diff, 30, 255, cv::THRESH_BINARY);
@@ -46,16 +72,15 @@ int main(int argc, char** argv) {
         std::vector<std::vector<cv::Point>> contours;
         cv::findContours(diff, contours, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);
 
+        cv::drawContours(frame, contours, -1, cv::Scalar(0, 255, 0), 2);
+
         // // Draw bounding boxes around detected objects
-        for (const auto& contour : contours) {
-            cv::Rect boundingBox = cv::boundingRect(contour);
-            cv::rectangle(frame, boundingBox, cv::Scalar(0, 255, 0), 2);
-        }
-        if(gray.type()==prevFrame.type()){ 
-            cv::imshow("Object Detection", diff);
-        }
-        // Display the result
-        // cv::imshow("Object Detection", frame);
+        // for (const auto& contour : contours) {
+        //     cv::Rect boundingBox = cv::boundingRect(contour);
+        //     cv::rectangle(frame, boundingBox, cv::Scalar(0, 255, 0), 2);
+        // }
+
+        cv::imshow("Object Detection", frame);
 
         // Exit when the 'ESC' key is pressed
         if (cv::waitKey(30) == 27)
@@ -63,6 +88,12 @@ int main(int argc, char** argv) {
 
         // Update the previous frame
         prevFrame = gray.clone();
+        allocator.Reset();
+        pre_ptr = allocator.Allocate(frameSize);
+        std::memcpy(pre_ptr, prevFrame.data, frameSize);
+        std::cout<<pre_ptr<<std::endl;
+        
+        cout<<"-------------"<<endl;
     }
 
 

@@ -1,6 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/DetectObstacles.dir/DetectObstacles.cpp.obj"
   "CMakeFiles/DetectObstacles.dir/DetectObstacles.cpp.obj.d"
+  "CMakeFiles/DetectObstacles.dir/LinearAllocator.cpp.obj"
+  "CMakeFiles/DetectObstacles.dir/LinearAllocator.cpp.obj.d"
   "D:/BOSCH/DetectObstacles.exe"
   "D:/BOSCH/DetectObstacles.exe.manifest"
   "D:/BOSCH/DetectObstacles.pdb"

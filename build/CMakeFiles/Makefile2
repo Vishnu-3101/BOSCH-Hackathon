@@ -63,6 +63,7 @@ CMAKE_BINARY_DIR = D:\BOSCH\build
 
 # The main recursive "all" target.
 all: CMakeFiles/DetectObstacles.dir/all
+all: CMakeFiles/TestMemCv.dir/all
 all: CMakeFiles/TestMemory.dir/all
 .PHONY : all
 
@@ -72,6 +73,7 @@ preinstall:
 
 # The main recursive "clean" target.
 clean: CMakeFiles/DetectObstacles.dir/clean
+clean: CMakeFiles/TestMemCv.dir/clean
 clean: CMakeFiles/TestMemory.dir/clean
 .PHONY : clean
 
@@ -82,12 +84,12 @@ clean: CMakeFiles/TestMemory.dir/clean
 CMakeFiles/DetectObstacles.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\DetectObstacles.dir\build.make CMakeFiles/DetectObstacles.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\DetectObstacles.dir\build.make CMakeFiles/DetectObstacles.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=D:\BOSCH\build\CMakeFiles --progress-num=1,2 "Built target DetectObstacles"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=D:\BOSCH\build\CMakeFiles --progress-num=1,2,3 "Built target DetectObstacles"
 .PHONY : CMakeFiles/DetectObstacles.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/DetectObstacles.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start D:\BOSCH\build\CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\BOSCH\build\CMakeFiles 3
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 CMakeFiles/DetectObstacles.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start D:\BOSCH\build\CMakeFiles 0
 .PHONY : CMakeFiles/DetectObstacles.dir/rule
@@ -102,13 +104,39 @@ CMakeFiles/DetectObstacles.dir/clean:
 .PHONY : CMakeFiles/DetectObstacles.dir/clean
 
 #=============================================================================
+# Target rules for target CMakeFiles/TestMemCv.dir
+
+# All Build rule for target.
+CMakeFiles/TestMemCv.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TestMemCv.dir\build.make CMakeFiles/TestMemCv.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TestMemCv.dir\build.make CMakeFiles/TestMemCv.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=D:\BOSCH\build\CMakeFiles --progress-num=4,5,6 "Built target TestMemCv"
+.PHONY : CMakeFiles/TestMemCv.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/TestMemCv.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\BOSCH\build\CMakeFiles 3
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 CMakeFiles/TestMemCv.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\BOSCH\build\CMakeFiles 0
+.PHONY : CMakeFiles/TestMemCv.dir/rule
+
+# Convenience name for target.
+TestMemCv: CMakeFiles/TestMemCv.dir/rule
+.PHONY : TestMemCv
+
+# clean rule for target.
+CMakeFiles/TestMemCv.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TestMemCv.dir\build.make CMakeFiles/TestMemCv.dir/clean
+.PHONY : CMakeFiles/TestMemCv.dir/clean
+
+#=============================================================================
 # Target rules for target CMakeFiles/TestMemory.dir
 
 # All Build rule for target.
 CMakeFiles/TestMemory.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\TestMemory.dir\build.make CMakeFiles/TestMemory.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\TestMemory.dir\build.make CMakeFiles/TestMemory.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=D:\BOSCH\build\CMakeFiles --progress-num=3,4,5 "Built target TestMemory"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=D:\BOSCH\build\CMakeFiles --progress-num=7,8,9 "Built target TestMemory"
 .PHONY : CMakeFiles/TestMemory.dir/all
 
 # Build rule for subdir invocation for target.

@@ -11,10 +11,13 @@ include_directories(include)
 find_package(OpenCV REQUIRED)
 
 # Add your source files and executable
-add_executable(DetectObstacles DetectObstacles.cpp)
-add_executable(TestMemory TestMemory.cpp LinearAllocator.cpp)
+add_executable(DetectObstacles DetectObstacles.cpp LinearAllocator.cpp)
+add_executable(TestMemCv TestMemCv.cpp LinearAllocator.cpp)
+add_executable(MemoryTest MemoryTest.cpp LinearAllocator.cpp)
 # add_executable(LinearAllocator LinearAllocator.cpp)
 
 # Link OpenCV libraries
 target_link_libraries(DetectObstacles ${OpenCV_LIBS})
+target_link_libraries(TestMemCv ${OpenCV_LIBS})
 target_include_directories(DetectObstacles PRIVATE include)
+# target_include_directories(TestMemCv PRIVATE include)
