@@ -95,6 +95,8 @@ int main(int argc, char** argv) {
         //     cv::rectangle(frame, boundingBox, cv::Scalar(0, 255, 0), 2);
         // }
 
+
+        videoWriter.write(frame);
         cv::imshow("Object Detection", frame);
 
         // Exit when the 'ESC' key is pressed
