@@ -5,6 +5,11 @@
 #include "LinearAllocator.h"
 #include "Utils.h"
 #include <Windows.h>
+
+// Libraries for linux
+// #include <cstdlib>
+// #include <unistd.h>
+// #include <sys/mman.h>
 using namespace std;
 
 
@@ -48,6 +53,13 @@ int main(int argc, char** argv) {
         std::cerr << "Error allocating memory at a specific address" << std::endl;
         return -1;
     }
+
+    // Code to allocate memory in LINUX
+
+    // if (mmap(startAddress, totalSize, PROT_READ | PROT_WRITE, MAP_FIXED | MAP_PRIVATE | MAP_ANONYMOUS, -1, 0) == MAP_FAILED) {
+    //     std::cerr << "Error allocating memory at a specific address" << std::endl;
+    //     return -1;
+    // }
 
 
     LinearAllocator allocator(totalSize);
