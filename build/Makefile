@@ -142,17 +142,17 @@ TestMemCv/fast:
 .PHONY : TestMemCv/fast
 
 #=============================================================================
-# Target rules for targets named TestMemory
+# Target rules for targets named MemoryTest
 
 # Build rule for target.
-TestMemory: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 TestMemory
-.PHONY : TestMemory
+MemoryTest: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 MemoryTest
+.PHONY : MemoryTest
 
 # fast build rule for target.
-TestMemory/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\TestMemory.dir\build.make CMakeFiles/TestMemory.dir/build
-.PHONY : TestMemory/fast
+MemoryTest/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\MemoryTest.dir\build.make CMakeFiles/MemoryTest.dir/build
+.PHONY : MemoryTest/fast
 
 DetectObstacles.obj: DetectObstacles.cpp.obj
 .PHONY : DetectObstacles.obj
@@ -185,7 +185,7 @@ LinearAllocator.obj: LinearAllocator.cpp.obj
 LinearAllocator.cpp.obj:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\DetectObstacles.dir\build.make CMakeFiles/DetectObstacles.dir/LinearAllocator.cpp.obj
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\TestMemCv.dir\build.make CMakeFiles/TestMemCv.dir/LinearAllocator.cpp.obj
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\TestMemory.dir\build.make CMakeFiles/TestMemory.dir/LinearAllocator.cpp.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\MemoryTest.dir\build.make CMakeFiles/MemoryTest.dir/LinearAllocator.cpp.obj
 .PHONY : LinearAllocator.cpp.obj
 
 LinearAllocator.i: LinearAllocator.cpp.i
@@ -195,7 +195,7 @@ LinearAllocator.i: LinearAllocator.cpp.i
 LinearAllocator.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\DetectObstacles.dir\build.make CMakeFiles/DetectObstacles.dir/LinearAllocator.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\TestMemCv.dir\build.make CMakeFiles/TestMemCv.dir/LinearAllocator.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\TestMemory.dir\build.make CMakeFiles/TestMemory.dir/LinearAllocator.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\MemoryTest.dir\build.make CMakeFiles/MemoryTest.dir/LinearAllocator.cpp.i
 .PHONY : LinearAllocator.cpp.i
 
 LinearAllocator.s: LinearAllocator.cpp.s
@@ -205,8 +205,32 @@ LinearAllocator.s: LinearAllocator.cpp.s
 LinearAllocator.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\DetectObstacles.dir\build.make CMakeFiles/DetectObstacles.dir/LinearAllocator.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\TestMemCv.dir\build.make CMakeFiles/TestMemCv.dir/LinearAllocator.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\TestMemory.dir\build.make CMakeFiles/TestMemory.dir/LinearAllocator.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\MemoryTest.dir\build.make CMakeFiles/MemoryTest.dir/LinearAllocator.cpp.s
 .PHONY : LinearAllocator.cpp.s
+
+MemoryTest.obj: MemoryTest.cpp.obj
+.PHONY : MemoryTest.obj
+
+# target to build an object file
+MemoryTest.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\MemoryTest.dir\build.make CMakeFiles/MemoryTest.dir/MemoryTest.cpp.obj
+.PHONY : MemoryTest.cpp.obj
+
+MemoryTest.i: MemoryTest.cpp.i
+.PHONY : MemoryTest.i
+
+# target to preprocess a source file
+MemoryTest.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\MemoryTest.dir\build.make CMakeFiles/MemoryTest.dir/MemoryTest.cpp.i
+.PHONY : MemoryTest.cpp.i
+
+MemoryTest.s: MemoryTest.cpp.s
+.PHONY : MemoryTest.s
+
+# target to generate assembly for a file
+MemoryTest.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\MemoryTest.dir\build.make CMakeFiles/MemoryTest.dir/MemoryTest.cpp.s
+.PHONY : MemoryTest.cpp.s
 
 TestMemCv.obj: TestMemCv.cpp.obj
 .PHONY : TestMemCv.obj
@@ -232,30 +256,6 @@ TestMemCv.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\TestMemCv.dir\build.make CMakeFiles/TestMemCv.dir/TestMemCv.cpp.s
 .PHONY : TestMemCv.cpp.s
 
-TestMemory.obj: TestMemory.cpp.obj
-.PHONY : TestMemory.obj
-
-# target to build an object file
-TestMemory.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\TestMemory.dir\build.make CMakeFiles/TestMemory.dir/TestMemory.cpp.obj
-.PHONY : TestMemory.cpp.obj
-
-TestMemory.i: TestMemory.cpp.i
-.PHONY : TestMemory.i
-
-# target to preprocess a source file
-TestMemory.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\TestMemory.dir\build.make CMakeFiles/TestMemory.dir/TestMemory.cpp.i
-.PHONY : TestMemory.cpp.i
-
-TestMemory.s: TestMemory.cpp.s
-.PHONY : TestMemory.s
-
-# target to generate assembly for a file
-TestMemory.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\TestMemory.dir\build.make CMakeFiles/TestMemory.dir/TestMemory.cpp.s
-.PHONY : TestMemory.cpp.s
-
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -265,20 +265,20 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... DetectObstacles
+	@echo ... MemoryTest
 	@echo ... TestMemCv
-	@echo ... TestMemory
 	@echo ... DetectObstacles.obj
 	@echo ... DetectObstacles.i
 	@echo ... DetectObstacles.s
 	@echo ... LinearAllocator.obj
 	@echo ... LinearAllocator.i
 	@echo ... LinearAllocator.s
+	@echo ... MemoryTest.obj
+	@echo ... MemoryTest.i
+	@echo ... MemoryTest.s
 	@echo ... TestMemCv.obj
 	@echo ... TestMemCv.i
 	@echo ... TestMemCv.s
-	@echo ... TestMemory.obj
-	@echo ... TestMemory.i
-	@echo ... TestMemory.s
 .PHONY : help
 
 

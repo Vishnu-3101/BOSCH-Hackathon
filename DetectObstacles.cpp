@@ -1,8 +1,10 @@
 #include <opencv2/opencv.hpp>
 #include <iostream>
 #include <cstring>
+#include <malloc.h>
 #include "LinearAllocator.h"
 #include "Utils.h"
+#include <Windows.h>
 using namespace std;
 
 
@@ -34,9 +36,19 @@ int main(int argc, char** argv) {
     cap >> prevFrame;
     cv::resize(prevFrame,prevFrame,cv::Size(640,480));
     cv::cvtColor(prevFrame, prevFrame, cv::COLOR_BGR2GRAY);
+
+    void* startAddress;
+    sscanf(argv[2], "%p", &startAddress);
+
     // cout<<"Size of frame: "<<sizeof(prevFrame)<<endl;
-    const std::size_t totalSize = 640 * 480 * 3 * 5; // Assuming frames are 3 channels (BGR) and storing two frames
-    void* startAddress = malloc(totalSize);
+    const std::size_t totalSize = 640 * 480 * 3 * 5; 
+
+    startAddress = VirtualAlloc(startAddress, totalSize, MEM_COMMIT | MEM_RESERVE, PAGE_READWRITE);
+    if (startAddress == nullptr) {
+        std::cerr << "Error allocating memory at a specific address" << std::endl;
+        return -1;
+    }
+
 
     LinearAllocator allocator(totalSize);
     allocator.Init(startAddress);
@@ -45,6 +57,8 @@ int main(int argc, char** argv) {
     void* pre_ptr = allocator.Allocate(frameSize);
     
     std::memcpy(pre_ptr, prevFrame.data, frameSize);
+    std::cout<<"Memory allocation started from address: "<<pre_ptr<<std::endl;
+
 
     while (cap.read(frame)) {
         cv::resize(frame,frame,cv::Size(640,480)); 
@@ -56,7 +70,7 @@ int main(int argc, char** argv) {
         void* gray_ptr = allocator.Allocate(frameSize);
         std::memcpy(gray_ptr, gray.data, frameSize);
         std::cout<<gray_ptr<<std::endl;
-        // cv::resize(prevFrame, prevFrame, cv::Size(640,480));
+        
         // Compute absolute difference between frames
         cv::Mat diff;
         
@@ -69,12 +83,13 @@ int main(int argc, char** argv) {
         cv::threshold(diff, diff, 30, 255, cv::THRESH_BINARY);
 
         // // Find contours in the binary image
-        std::vector<std::vector<cv::Point>> contours;
-        cv::findContours(diff, contours, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);
+        void* contours_ptr = allocator.Allocate(sizeof(std::vector<std::vector<cv::Point>>));
+        std::vector<std::vector<cv::Point>>* contoursVector = new (contours_ptr) std::vector<std::vector<cv::Point>>();
+        std::cout<<contoursVector<<std::endl;
+        cv::findContours(diff, *contoursVector, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);
 
-        cv::drawContours(frame, contours, -1, cv::Scalar(0, 255, 0), 2);
+        cv::drawContours(frame, *contoursVector, -1, cv::Scalar(0, 255, 0), 2);
 
-        // // Draw bounding boxes around detected objects
         // for (const auto& contour : contours) {
         //     cv::Rect boundingBox = cv::boundingRect(contour);
         //     cv::rectangle(frame, boundingBox, cv::Scalar(0, 255, 0), 2);
@@ -96,12 +111,10 @@ int main(int argc, char** argv) {
         cout<<"-------------"<<endl;
     }
 
-
-    // int storedValue = memoryManager.getMemoryValue();
-    // cout << "Stored Value in Custom Memory: " << memoryManager.getMemoryValue() << endl;
-    // Release the video capture object
+    
     cap.release();
-
+    allocator.Reset();
+    free(startAddress);
     cv::destroyAllWindows();
 
     // Retrieve the stored value from custom memory and print it

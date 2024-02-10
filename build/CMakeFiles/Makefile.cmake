@@ -58,5 +58,5 @@ set(CMAKE_MAKEFILE_PRODUCTS
 set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/DetectObstacles.dir/DependInfo.cmake"
   "CMakeFiles/TestMemCv.dir/DependInfo.cmake"
-  "CMakeFiles/TestMemory.dir/DependInfo.cmake"
+  "CMakeFiles/MemoryTest.dir/DependInfo.cmake"
   )
