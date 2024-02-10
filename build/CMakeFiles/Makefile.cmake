@@ -8,6 +8,11 @@ set(CMAKE_DEPENDS_GENERATOR "MinGW Makefiles")
 set(CMAKE_MAKEFILE_DEPENDS
   "CMakeCache.txt"
   "D:/BOSCH/CMakeLists.txt"
+  "D:/BOSCH/OpenCV/OpenCVConfig-version.cmake"
+  "D:/BOSCH/OpenCV/OpenCVConfig.cmake"
+  "D:/BOSCH/OpenCV/x64/mingw/lib/OpenCVConfig.cmake"
+  "D:/BOSCH/OpenCV/x64/mingw/lib/OpenCVModules-release.cmake"
+  "D:/BOSCH/OpenCV/x64/mingw/lib/OpenCVModules.cmake"
   "CMakeFiles/3.28.2/CMakeCCompiler.cmake"
   "CMakeFiles/3.28.2/CMakeCXXCompiler.cmake"
   "CMakeFiles/3.28.2/CMakeRCCompiler.cmake"
@@ -36,11 +41,6 @@ set(CMAKE_MAKEFILE_DEPENDS
   "D:/CMake/share/cmake-3.28/Modules/Platform/Windows-windres.cmake"
   "D:/CMake/share/cmake-3.28/Modules/Platform/Windows.cmake"
   "D:/CMake/share/cmake-3.28/Modules/Platform/WindowsPaths.cmake"
-  "D:/OpenCV4.9.0/OpenCV-MinGW-Build/OpenCVConfig-version.cmake"
-  "D:/OpenCV4.9.0/OpenCV-MinGW-Build/OpenCVConfig.cmake"
-  "D:/OpenCV4.9.0/OpenCV-MinGW-Build/x64/mingw/lib/OpenCVConfig.cmake"
-  "D:/OpenCV4.9.0/OpenCV-MinGW-Build/x64/mingw/lib/OpenCVModules-release.cmake"
-  "D:/OpenCV4.9.0/OpenCV-MinGW-Build/x64/mingw/lib/OpenCVModules.cmake"
   )
 
 # The corresponding makefile is:

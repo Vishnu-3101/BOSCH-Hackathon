@@ -2,8 +2,8 @@ cmake_minimum_required(VERSION 3.12)
 project(BOSCH)
 
 # Set the path to the OpenCVConfig.cmake file
-set(OpenCV_DIR "D:/OpenCV4.9.0/OpenCV-MinGW-Build")  # Replace with the actual path to your OpenCV build directory
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "D:/BOSCH")
+set(OpenCV_DIR "OpenCV/")  # Replace with the actual path to your OpenCV build directory
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "../")
 
 include_directories(include)
 
