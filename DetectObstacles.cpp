@@ -10,12 +10,14 @@
 // #include <cstdlib>
 // #include <unistd.h>
 // #include <sys/mman.h>
-using namespace std;
 
+// Uncomment these two lines to not specify std:: or cv::
+// using namespace std;
+// using namespace cv;
 
 
 int main(int argc, char** argv) {
-    cout<<"Hello"<<endl;
+    std::cout<<"Program Execution started......."<<std::endl;
     if (argc != 3) {
         std::cerr << "Usage: " << argv[0] << " <video_file_path> <memory_address> <executable_name>" << std::endl;
         return -1;
@@ -62,6 +64,8 @@ int main(int argc, char** argv) {
     // }
 
 
+    // Initialize the linear allocator with desired size
+
     LinearAllocator allocator(totalSize);
     allocator.Init(startAddress);
     const std::size_t frameSize = 640 * 480;
@@ -76,12 +80,11 @@ int main(int argc, char** argv) {
         cv::resize(frame,frame,cv::Size(640,480)); 
         void* frm_ptr = allocator.Allocate(frameSize);
         std::memcpy(frm_ptr, frame.data, frameSize); 
-        std::cout<<frm_ptr<<std::endl; 
 
         cv::cvtColor(frame, gray, cv::COLOR_BGR2GRAY);
         void* gray_ptr = allocator.Allocate(frameSize);
         std::memcpy(gray_ptr, gray.data, frameSize);
-        std::cout<<gray_ptr<<std::endl;
+
         
         // Compute absolute difference between frames
         cv::Mat diff;
@@ -89,7 +92,6 @@ int main(int argc, char** argv) {
         cv::absdiff(prevFrame, gray, diff);   
         void* diff_ptr = allocator.Allocate(frameSize);  
         std::memcpy(diff_ptr, diff.data, frameSize);  
-        std::cout<<diff_ptr<<std::endl;
 
         // Apply threshold to get binary image
         cv::threshold(diff, diff, 30, 255, cv::THRESH_BINARY);
@@ -97,10 +99,11 @@ int main(int argc, char** argv) {
         // // Find contours in the binary image
         void* contours_ptr = allocator.Allocate(sizeof(std::vector<std::vector<cv::Point>>));
         std::vector<std::vector<cv::Point>>* contoursVector = new (contours_ptr) std::vector<std::vector<cv::Point>>();
-        std::cout<<contoursVector<<std::endl;
         cv::findContours(diff, *contoursVector, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);
 
         cv::drawContours(frame, *contoursVector, -1, cv::Scalar(0, 255, 0), 2);
+
+        // Uncomment the below code to draw bounding boxes around the dynamic obstacle
 
         // for (const auto& contour : contours) {
         //     cv::Rect boundingBox = cv::boundingRect(contour);
@@ -115,23 +118,26 @@ int main(int argc, char** argv) {
         if (cv::waitKey(30) == 27)
             break;
 
-        // Update the previous frame
+        // Update the previous frame to gray frame
         prevFrame = gray.clone();
+
+        // Reset the memory address to the start address. See LinearAllocator.cpp file for clarity
         allocator.Reset();
+        std::cout<<"Memory allocation reset to start address: "<<pre_ptr<<std::endl;
+
+        // Allocate memory to store the new previous frame at start address
         pre_ptr = allocator.Allocate(frameSize);
         std::memcpy(pre_ptr, prevFrame.data, frameSize);
-        std::cout<<pre_ptr<<std::endl;
-        
-        cout<<"-------------"<<endl;
+           
+        std::cout<<"-------------"<<std::endl;
     }
-
     
-    cap.release();
+    // Free all the allocated memory if not freed by memory allocator.
     allocator.Reset();
     free(startAddress);
-    cv::destroyAllWindows();
 
-    // Retrieve the stored value from custom memory and print it
+    cap.release();
+    cv::destroyAllWindows();
 
     return 0;
 }
