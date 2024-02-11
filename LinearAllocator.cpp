@@ -12,7 +12,7 @@ LinearAllocator::LinearAllocator(const std::size_t totalSize)
 }
 
 void LinearAllocator::Init(void *addr) {
-    // Free the memory the specified address if present
+    // Free the memory in the specified address if present
     if (m_start_ptr != nullptr) {
         free(m_start_ptr);
     }
