@@ -50,6 +50,8 @@ int main(int argc, char** argv) {
     // cout<<"Size of frame: "<<sizeof(prevFrame)<<endl;
     const std::size_t totalSize = 640 * 480 * 3 * 5; 
 
+    // Code to allocate memory at custom address in Windows
+
     startAddress = VirtualAlloc(startAddress, totalSize, MEM_COMMIT | MEM_RESERVE, PAGE_READWRITE);
     if (startAddress == nullptr) {
         std::cerr << "Error allocating memory at a specific address" << std::endl;
